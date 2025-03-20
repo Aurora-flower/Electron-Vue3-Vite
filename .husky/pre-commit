@@ -1,0 +1,5 @@
+# .husky/pre-commit
+
+npm run check:audit
+npm run format
+npm run lint

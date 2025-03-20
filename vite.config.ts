@@ -1,0 +1,151 @@
+import { resolve } from 'node:path';
+import vue from '@vitejs/plugin-vue';
+import electron, {
+  type ElectronSimpleOptions,
+} from 'vite-plugin-electron/simple';
+import native from 'vite-plugin-native';
+import tailwind from '@tailwindcss/postcss';
+import { createHtmlPlugin } from 'vite-plugin-html';
+import vueJsx from '@vitejs/plugin-vue-jsx';
+import { fileURLToPath, URL } from 'node:url';
+import vueDevTools from 'vite-plugin-vue-devtools';
+import renderer from 'vite-plugin-electron-renderer';
+import { loadEnv, type ConfigEnv, type UserConfig } from 'vite';
+
+// https://vite.dev/config/
+// import { defineConfig } from 'vite';
+// export default defineConfig({
+// });
+
+const root = process.cwd();
+
+function rootResolve(...paths: string[]) {
+  return resolve(root, ...paths);
+}
+
+function registerHtmlPlugin() {
+  return createHtmlPlugin({
+    minify: true,
+    entry: 'source/src/main.ts',
+    template: 'index.html',
+    inject: {
+      tags: [
+        {
+          tag: 'meta',
+          attrs: {
+            'http-equiv': 'Content-Security-Policy',
+            content: "default-src 'self'; style-src 'self' 'unsafe-inline';",
+          },
+        },
+        {
+          tag: 'title',
+          children: 'Electron-Vue-Vite',
+        },
+      ],
+    },
+  });
+}
+
+function getElectronConfig() {
+  const main = {
+    entry: 'source/electron/main.ts',
+    vite: {
+      build: {
+        sourcemap: true,
+        rollupOptions: {
+          external: [],
+        },
+      },
+      plugins: [native({})],
+    },
+    // onstart(o: { startup: (arg0: string[]) => void }) {
+    //   o.startup(['.', '--no-sandbox']);
+    //   console.log('[startup] Electron App', o);
+    // },
+  };
+  const preload = {
+    input: 'source/preload/index.ts',
+    vite: {
+      build: {
+        sourcemap: true,
+        outDir: 'dist-electron/preload',
+        rollupOptions: {
+          external: [],
+        },
+      },
+    },
+  };
+  const renderer = {
+    resolve: {},
+  };
+  const options: ElectronSimpleOptions = { main, preload, renderer };
+  return electron(options);
+}
+
+export default ({ command, mode }: ConfigEnv): UserConfig => {
+  console.log('command:', command, 'mode:', mode);
+  const env = loadEnv(mode, rootResolve('.config'));
+  console.log('env:', process.env.NODE_ENV, env);
+  return {
+    plugins: [
+      vue(),
+      vueJsx(),
+      vueDevTools(),
+      renderer({}),
+      registerHtmlPlugin(),
+      getElectronConfig(),
+    ],
+    resolve: {
+      extensions: ['.mjs', '.js', '.ts', '.json', '.css', '.scss', '.vue'],
+      alias: {
+        '@': fileURLToPath(new URL('./source', import.meta.url)),
+      },
+      // [
+      //   {
+      //     find: /\@\//,
+      //     replacement: `${rootResolve('src')}/`,
+      //   },
+      // ],
+    },
+    css: {
+      postcss: {
+        plugins: [tailwind()],
+      },
+    },
+    build: {
+      cssCodeSplit: true,
+      minify: 'terser',
+      sourcemap: true,
+      terserOptions: {
+        compress: {
+          drop_debugger: true,
+          drop_console: true,
+        },
+      },
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              return 'vendor';
+            }
+          },
+        },
+      },
+    },
+    server: {
+      // port: 4000,
+      // proxy: {
+      // '/api': {
+      //   target: 'http://127.0.0.1:7001',
+      //   changeOrigin: true,
+      //   rewrite: path => path.replace(/^\/api/, ''),
+      // },
+      // },
+      // hmr: {
+      //   overlay: true,
+      // },
+      // host: '0.0.0.0',
+      open: false,
+    },
+  };
+};
