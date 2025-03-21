@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "是基于 `Electron` + `Vue` + `Vite` 创建的项目模板。",
   "private": true,
-  "main": "dist-electron/main.js",
+  "main": "app/electron/main.js",
   "author": "Aurora-flower",
   "scripts": {
     "dev": "vite",

@@ -49,11 +49,12 @@ function writeFile(file, data) {
     console.log('build fail');
   }
   const buffer = readFileSync('package.json');
+  const outDir = 'app/';
   const config = 'package.json';
   const { name, main, author, private, version, description, dependencies } =
     JSON.parse(buffer.toString());
   const distPackage = {
-    name,
+    name: name.replace(outDir, ''),
     main,
     author,
     private,
@@ -61,6 +62,6 @@ function writeFile(file, data) {
     description,
     dependencies,
   };
-  await writeFile(`app/${config}`, JSON.stringify(distPackage, null, 2));
+  await writeFile(`${outDir + config}`, JSON.stringify(distPackage, null, 2));
   console.log(config, distPackage);
 })();
