@@ -34,7 +34,8 @@ function registerHtmlPlugin() {
           tag: 'meta',
           attrs: {
             'http-equiv': 'Content-Security-Policy',
-            content: "default-src 'self'; style-src 'self' 'unsafe-inline';",
+            content:
+              "default-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://api.iconify.design;",
           },
         },
         {
@@ -58,10 +59,6 @@ function getElectronConfig() {
       },
       plugins: [native({})],
     },
-    // onstart(o: { startup: (arg0: string[]) => void }) {
-    //   o.startup(['.', '--no-sandbox']);
-    //   console.log('[startup] Electron App', o);
-    // },
   };
   const preload = {
     input: 'source/preload/index.ts',
@@ -100,12 +97,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       alias: {
         '@': fileURLToPath(new URL('./source', import.meta.url)),
       },
-      // [
-      //   {
-      //     find: /\@\//,
-      //     replacement: `${rootResolve('src')}/`,
-      //   },
-      // ],
     },
     css: {
       postcss: {
@@ -133,18 +124,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       },
     },
     server: {
-      // port: 4000,
-      // proxy: {
-      // '/api': {
-      //   target: 'http://127.0.0.1:7001',
-      //   changeOrigin: true,
-      //   rewrite: path => path.replace(/^\/api/, ''),
-      // },
-      // },
-      // hmr: {
-      //   overlay: true,
-      // },
-      // host: '0.0.0.0',
       open: false,
     },
   };
