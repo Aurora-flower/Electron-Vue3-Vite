@@ -55,6 +55,7 @@ function getElectronConfig() {
     entry: 'source/electron/main.ts',
     vite: {
       build: {
+        outDir: 'app/electron',
         sourcemap: true,
         rollupOptions: {
           external: [],
@@ -67,8 +68,8 @@ function getElectronConfig() {
     input: 'source/preload/index.ts',
     vite: {
       build: {
+        outDir: 'app/preload',
         sourcemap: true,
-        outDir: 'dist-electron/preload',
         rollupOptions: {
           external: [],
         },
@@ -107,6 +108,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       },
     },
     build: {
+      outDir: 'app/public',
       cssCodeSplit: true,
       minify: 'terser',
       sourcemap: true,
@@ -116,17 +118,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           drop_console: true,
         },
       },
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              return 'vendor';
-            }
-          },
-        },
-      },
     },
     server: {
+      port: 59080,
       open: false,
     },
   };

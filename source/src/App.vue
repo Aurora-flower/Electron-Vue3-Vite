@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import LogoImage from '@/src/assets/logo.svg';
 import { RouterLink, RouterView } from 'vue-router';
+
 import HelloWorld from '@/src/components/HelloWorld.vue';
 </script>
 
@@ -8,7 +10,7 @@ import HelloWorld from '@/src/components/HelloWorld.vue';
     <img
       alt="Vue logo"
       class="logo"
-      src="../src/assets/logo.svg"
+      :src="`${LogoImage}`"
       width="125"
       height="125"
     />
