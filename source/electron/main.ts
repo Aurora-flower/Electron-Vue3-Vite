@@ -12,7 +12,7 @@ app.whenReady().then(() => {
   });
 
   // You can use `process.env.VITE_DEV_SERVER_URL` when the vite command is called `serve`
-  if (process.env.VITE_DEV_SERVER_URL) {
+  if (!app.isPackaged && process.env.VITE_DEV_SERVER_URL) {
     win.loadURL(process.env.VITE_DEV_SERVER_URL);
   } else {
     // Load your file
