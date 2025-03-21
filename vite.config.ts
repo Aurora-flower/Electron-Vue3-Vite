@@ -35,7 +35,10 @@ function registerHtmlPlugin() {
           attrs: {
             'http-equiv': 'Content-Security-Policy',
             content:
-              "default-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://api.iconify.design;",
+              `default-src 'self';` +
+              `connect-src 'self' https://api.iconify.design;` +
+              `style-src 'self' 'unsafe-inline';` +
+              `img-src 'self' data:;`,
           },
         },
         {
