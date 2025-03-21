@@ -22,7 +22,7 @@
     "clean:cache": "npm cache clean --force",
     "clean:app": "rimraf app",
     "clean:release": "rimraf release",
-    "package": "run-p \"clean-release\" \"build-setup\" && electron-builder"
+    "package": "run-p \"clean:release\" \"build-setup\" && electron-builder"
   },
   "dependencies": {
     "electron-log": "^5.3.2",
