@@ -1,0 +1,17 @@
+appId: website.app.electron-vue-vite
+
+productName: electron-vue-vite
+
+appImage:
+  artifactName: ${productName}-${version}-${arch}.${ext}
+
+copyright: Copyright © 2025 ${productName} ${author}
+
+buildDependenciesFromSource: true
+
+directories:
+  app: app
+  output: release/${version}
+
+asarUnpack:
+  - '**/node_modules/**'

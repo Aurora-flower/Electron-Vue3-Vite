@@ -2,6 +2,7 @@
 dist
 dist-ssr
 dist-electron
+release
 
 # 编辑器目录和文件 (Editor directories and files)
 # .vscode/*

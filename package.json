@@ -4,6 +4,7 @@
   "description": "是基于 `Electron` + `Vue` + `Vite` 创建的项目模板。",
   "private": true,
   "main": "dist-electron/main.js",
+  "author": "Aurora-flower",
   "scripts": {
     "dev": "vite",
     "check:out": "npm outdated",
@@ -15,7 +16,8 @@
     "type-check": "vue-tsc --build",
     "lint": "eslint .",
     "format": "prettier --write source/",
-    "prepare": "husky"
+    "prepare": "husky",
+    "package": "electron-builder"
   },
   "dependencies": {
     "electron-log": "^5.3.2",
