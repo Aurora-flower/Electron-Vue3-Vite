@@ -81,3 +81,4 @@ npm run dev
 - [Vitest](https://cn.vitest.dev/?from=home-page.cn)
 - [Husky](https://husky.nodejs.cn/get-started.html)
 - [NPM](https://www.npmjs.com/)
+- [Tsconfig 配置](https://www.tslang.cn/docs/handbook/tsconfig-json.html)

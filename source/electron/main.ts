@@ -7,7 +7,6 @@ function resolvePath(relUrl: string) {
 }
 
 app.whenReady().then(() => {
-  // const isDev = process.env.NODE_ENV === 'development';
   const win = new BrowserWindow({
     title: 'Electron-Vue-Vite',
     webPreferences: {

@@ -36,9 +36,11 @@ function registerHtmlPlugin() {
             'http-equiv': 'Content-Security-Policy',
             content:
               `default-src 'self';` +
-              `connect-src 'self' https://api.iconify.design;` +
+              `connect-src 'self' blob: data: https://api.iconify.design;` +
               `style-src 'self' 'unsafe-inline';` +
-              `img-src 'self' data:;`,
+              `img-src 'self' data: blob:;` +
+              `worker-src 'self' blob: data:;` +
+              `script-src 'self' blob:;`,
           },
         },
         {
@@ -84,18 +86,19 @@ function getElectronConfig() {
 }
 
 export default ({ command, mode }: ConfigEnv): UserConfig => {
+  const isDev = process.env.NODE_ENV === 'development';
   console.log('command:', command, 'mode:', mode);
   const env = loadEnv(mode, rootResolve('.config'));
-  console.log('env:', process.env.NODE_ENV, env);
+  console.log('env:', isDev, env);
   return {
     plugins: [
       vue(),
       vueJsx(),
-      vueDevTools(),
+      isDev && vueDevTools(),
       renderer({}),
       registerHtmlPlugin(),
       getElectronConfig(),
-    ],
+    ].filter(Boolean),
     resolve: {
       extensions: ['.mjs', '.js', '.ts', '.json', '.css', '.scss', '.vue'],
       alias: {
