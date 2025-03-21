@@ -10,19 +10,20 @@
     "up": "npm update --major",
     "check:out": "npm outdated",
     "check:audit": "npm audit --registry=https://registry.npmjs.org",
-    "build": "run-p type-check \"build-only {@}\" --",
-    "build-setup": "node build/buildSetup.js",
     "preview": "vite preview",
     "test:unit": "vitest",
+    "build": "node build/buildSetup.js",
     "build-only": "vite build",
+    "build-check": "run-p type-check \"build-only {@}\" --",
     "type-check": "vue-tsc --build",
     "lint": "eslint .",
     "format": "prettier --write source/",
     "prepare": "husky",
     "clean:cache": "npm cache clean --force",
     "clean:app": "rimraf app",
+    "commit": "node scripts/commit.js",
     "clean:release": "rimraf release",
-    "package": "run-p \"clean:release\" \"build-setup\" && electron-builder"
+    "package": "run-p \"clean:release\" \"build\" && electron-builder"
   },
   "dependencies": {
     "electron-log": "^5.3.2",

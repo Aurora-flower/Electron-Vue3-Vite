@@ -54,8 +54,8 @@ function writeFile(file, data) {
   const { name, main, author, private, version, description, dependencies } =
     JSON.parse(buffer.toString());
   const distPackage = {
-    name: name.replace(outDir, ''),
-    main,
+    name,
+    main: main.replace(outDir, ''),
     author,
     private,
     version,
