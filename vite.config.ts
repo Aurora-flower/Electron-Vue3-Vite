@@ -50,7 +50,7 @@ function registerHtmlPlugin() {
             content:
               `default-src 'self';` +
               `connect-src 'self' blob: data: https://api.iconify.design;` +
-              `style-src 'self' 'unsafe-inline';` + // Tip: 在 vite 中对严格 CSP 的支持，暂时未找到合适的解决方案，临时写法
+              `style-src 'self' 'unsafe-inline';` + // Tip: 在 vite 中缺少对严格 CSP 的支持，暂时未找到合适的解决方案，临时写法
               `img-src 'self' data: blob:;` +
               `worker-src 'self' blob: data:;` +
               `script-src 'self' blob:;`,
