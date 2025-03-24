@@ -72,9 +72,6 @@ function getElectronConfig() {
       build: {
         outDir: 'app/electron',
         sourcemap: true,
-        rollupOptions: {
-          external: [],
-        },
       },
       plugins: [native({})],
     },
@@ -116,7 +113,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       extensions: ['.mjs', '.js', '.ts', '.json', '.css', '.scss', '.vue'],
       alias: {
         '@': fileURLToPath(new URL('./source/src', import.meta.url)),
-        '@main': fileURLToPath(new URL('./source/electron', import.meta.url)),
       },
     },
     css: {
