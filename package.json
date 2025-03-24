@@ -1,6 +1,6 @@
 {
   "name": "electron-vue-vite",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "是基于 `Electron` + `Vue` + `Vite` 创建的项目模板。",
   "private": true,
   "main": "app/electron/main.js",
@@ -12,7 +12,6 @@
     "check:audit": "npm audit --registry=https://registry.npmjs.org",
     "preview": "vite preview",
     "test:unit": "vitest",
-    "publish": "electron-builder -p always",
     "build": "node build/buildSetup.js",
     "build-only": "vite build",
     "build-check": "run-p type-check \"build-only {@}\" --",
@@ -24,7 +23,8 @@
     "clean:app": "rimraf app",
     "commit": "node scripts/commit.js",
     "clean:release": "rimraf release",
-    "package": "run-p \"clean:release\" \"build\" && electron-builder"
+    "publish": "run-p \"clean:release\" \"build\" && electron-builder -p always",
+    "package": "run-p \"clean:release\" \"build\" && electron-builder -p never"
   },
   "dependencies": {
     "electron-log": "^5.3.2",
