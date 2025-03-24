@@ -16,15 +16,7 @@ directories:
 asarUnpack:
   - '**/node_modules/**'
 
-win:
-  publish:
-    # an object provider for github with additional options
-    - provider: github
-      protocol: https
-      # a string provider for bitbucket that will use default options
-
 publish:
   provider: github
   owner: Aurora-flower
   repo: Electron-Vue3-Vite
-  releaseType: draft
