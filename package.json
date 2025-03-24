@@ -12,6 +12,7 @@
     "check:audit": "npm audit --registry=https://registry.npmjs.org",
     "preview": "vite preview",
     "test:unit": "vitest",
+    "publish": "electron-builder -p always",
     "build": "node build/buildSetup.js",
     "build-only": "vite build",
     "build-check": "run-p type-check \"build-only {@}\" --",
