@@ -59,7 +59,9 @@
 }
 
 body {
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
   color: var(--color-text);
   background: var(--color-background);
   transition:

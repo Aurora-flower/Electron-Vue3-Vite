@@ -28,17 +28,6 @@ function writeFile(file, data) {
   });
 }
 
-// function copyFile(src, dist) {
-//   return new Promise((resolve, reject) => {
-//     const rs = fs.createReadStream(src);
-//     const ws = fs.createWriteStream(dist);
-//     rs.on('error', reject);
-//     ws.on('error', reject);
-//     ws.on('close', resolve);
-//     rs.pipe(ws);
-//   });
-// }
-
 (async () => {
   await rimraf('app');
   const command = `npm run build-only ${process.argv.slice(2).join(' ')}`;

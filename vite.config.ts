@@ -23,6 +23,19 @@ function rootResolve(...paths: string[]) {
   return resolve(root, ...paths);
 }
 
+/**
+ * @summary 在服务端生成 CSP Nonce,解决 Style 'unsafe-inline' 的问题。
+ * @description CSP支持使用 Nonce 和 Hash 来限制特定来源的脚本执行。
+ * 可以在服务器端生成一个随机的 Nonce 值，并在 HTTP 头中包含'Content-Security-Policy'时，将该 Nonce 值添加到策略指令中。
+ *
+ * 注意:
+ * 是在服务端的处理。
+ */
+// const generateNonce = () => {
+//   const nonce = Math.random().toString(36).substring(2, 10);
+//   return `'nonce-${nonce}'`;
+// };
+
 function registerHtmlPlugin() {
   return createHtmlPlugin({
     minify: true,
@@ -102,7 +115,8 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     resolve: {
       extensions: ['.mjs', '.js', '.ts', '.json', '.css', '.scss', '.vue'],
       alias: {
-        '@': fileURLToPath(new URL('./source', import.meta.url)),
+        '@': fileURLToPath(new URL('./source/src', import.meta.url)),
+        '@main': fileURLToPath(new URL('./source/electron', import.meta.url)),
       },
     },
     css: {

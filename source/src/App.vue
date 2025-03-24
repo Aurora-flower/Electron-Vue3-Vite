@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import LogoImage from '@/src/assets/logo.svg';
+import LogoImage from '@/assets/logo.svg';
 import { RouterLink, RouterView } from 'vue-router';
 
-import HelloWorld from '@/src/components/HelloWorld.vue';
+import HelloWorld from '@/components/HelloWorld.vue';
 </script>
 
 <template>
