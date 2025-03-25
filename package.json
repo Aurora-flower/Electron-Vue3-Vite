@@ -1,6 +1,6 @@
 {
   "name": "electron-vue-vite",
-  "version": "0.0.4",
+  "version": "0.0.1",
   "description": "是基于 `Electron` + `Vue` + `Vite` 创建的项目模板。",
   "private": true,
   "main": "app/electron/main.js",

@@ -29,11 +29,11 @@ export function update(window?: BrowserWindow | undefined) {
     return;
   }
   const autoUpdaterInstance = getAutoUpdater();
-  autoUpdaterInstance.setFeedURL({
-    provider: 'github',
-    owner: 'Aurora-flower',
-    repo: 'Electron-Vue3-Vite',
-  });
+  // autoUpdaterInstance.setFeedURL({
+  //   provider: 'github',
+  //   owner: 'Aurora-flower',
+  //   repo: 'Electron-Vue3-Vite',
+  // });
   autoUpdaterInstance.checkForUpdatesAndNotify();
 
   Logger.info('update');
